@@ -57,4 +57,73 @@ size of union of char[5] and float is 8
 
 #define ITM_Port32(n)		(*((volatile uint32_t*)(0xE0000000u + 4*n)))
 
+ITM_Port32(31) = 1;
 
+//////////////////////////////////////////////////////////////////
+
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef _inclination_handler_H_
+#define _inclination_handler_H_
+
+
+// if you want to declare structure in .h file we must use typedef keyword
+// and if you want to extern it we must use typedef keyword 
+
+typedef struct{
+  
+  union {
+    
+      struct{
+        float X_axis;
+        float Y_axis;
+        }axis;
+      
+      struct{
+        uint8_t X_transfer[4];
+        uint8_t Y_transfer[4];
+      }signle_trans;
+  
+      uint8_t double_trans[8];
+      
+  }ABS_FLT;
+  
+  union {
+    
+     struct{
+        float X_axis;
+        float Y_axis;
+        }axis;
+      
+      struct{
+        uint8_t X_transfer[4];
+        uint8_t Y_transfer[4];
+      }signle_trans;
+  
+      uint8_t double_trans[8];
+
+  }REL_FLT;
+  
+  union {
+    
+    struct{
+        float X_axis;
+        float Y_axis;
+        }axis;
+      
+      struct{
+        uint8_t X_transfer[4];
+        uint8_t Y_transfer[4];
+      }signle_trans;
+  
+      uint8_t double_trans[8];
+
+  }ABS_RAW;
+  
+}angle_type_t;
+
+extern angle_type_t angle_type;
+
+#endif
+
+//////////////////////////////////////////////////////////////////
